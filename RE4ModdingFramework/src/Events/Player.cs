@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RE4ModingFramework.src.Events
+namespace RE4ModdingFramework.src.Events
 {
     public class Player
     {
@@ -18,7 +18,7 @@ namespace RE4ModingFramework.src.Events
         public Player()
         {
             var damagedEv = new OnPlayerDamagedEventArgs(31, 20);
-            PlayerDamaged.Invoke(damagedEv);
+            PlayerDamaged?.Invoke(damagedEv);
         }
     }
 }

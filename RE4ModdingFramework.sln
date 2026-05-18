@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.37111.16 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RE4ModingFramework", "RE4ModingFramework\RE4ModingFramework.csproj", "{8A7942E7-7173-4989-87EC-EC18027D7CAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RE4ModdingFramework", "RE4ModdingFramework\RE4ModdingFramework.csproj", "{8A7942E7-7173-4989-87EC-EC18027D7CAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

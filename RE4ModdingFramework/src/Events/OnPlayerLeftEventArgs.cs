@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RE4ModingFramework.src.Events
+namespace RE4ModdingFramework.src.Events
 {
     public class OnPlayerLeftEventArgs : EventArgs
     {

@@ -1,6 +1,6 @@
-﻿using RE4ModingFramework.src.Events;
+﻿using RE4ModdingFramework.src.Events;
 
-namespace RE4ModingFramework.src
+namespace RE4ModdingFramework.src
 {
     internal class Program
     {

@@ -1,4 +1,5 @@
 ﻿using RE4ModdingFramework.src.Events;
+using RE4ModdingFramework.src.Logging;
 
 namespace RE4ModdingFramework.src
 {

@@ -1,5 +1,7 @@
 ﻿using RE4ModdingFramework.src.Events;
 using RE4ModdingFramework.src.Logging;
+using RE4ModdingFramework.src.Enums;
+using RE4ModdingFramework.src.Handlers;
 
 namespace RE4ModdingFramework.src
 {
@@ -7,30 +9,20 @@ namespace RE4ModdingFramework.src
     {
         static void Main(string[] args)
         {
-            Player.PlayerJoined += OnPlayerJoined;
-            Player.PlayerLeft += OnPlayerLeft;
-            Player.PlayerDamaged += OnPlayerDamaged;
+            Memory.Attach("re4");
 
-            var player = new Player();
+            Player.AmmoChanged += OnAmmoChanged;
 
-            Player.PlayerJoined -= OnPlayerJoined;
-            Player.PlayerLeft -= OnPlayerLeft;
-            Player.PlayerDamaged -= OnPlayerDamaged;
+            while (Memory.IsAttached())
+            {
+                OnAmmoChangedHandler.Poll();
+                Thread.Sleep(50);
+            }
         }
 
-        private static void OnPlayerDamaged(OnPlayerDamagedEventArgs ev)
+        private static void OnAmmoChanged(OnAmmoChangedEventArgs ev)
         {
-            Log.Info($"Player Took: {ev.Damage} Damage, And current health is: {ev.Health}");
-        }
-
-        private static void OnPlayerLeft(OnPlayerLeftEventArgs ev)
-        {
-            Log.Info($"Player: {ev.PlayerName}, Has Left The Game!");
-        }
-
-        private static void OnPlayerJoined(OnPlayerJoinedEventArgs ev)
-        {
-            Log.Info($"Player: {ev.PlayerName}, Has Joined The Game!");
+            Log.Info($"Ammo has changed and now it is: {ev.Ammo}");
         }
     }
 }

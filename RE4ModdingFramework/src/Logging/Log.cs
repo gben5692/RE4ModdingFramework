@@ -13,22 +13,22 @@ namespace RE4ModdingFramework.src.Logging
             DEBUG
         }
 
-        public static void Info(string msg, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string caller = null)
+        public static void Info(string msg, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string? caller = null)
         {
             Write(msg, Level.INFO, ConsoleColor.Cyan, lineNumber, caller);
         }
 
-        public static void Error(string msg, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string caller = null)
+        public static void Error(string msg, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string? caller = null)
         {
             Write(msg, Level.ERROR, ConsoleColor.Red, lineNumber, caller);
         }
 
-        public static void Warning(string msg, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string caller = null)
+        public static void Warning(string msg, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string? caller = null)
         {
             Write(msg, Level.WARNING, ConsoleColor.Yellow, lineNumber, caller);
         }
 
-        public static void Debug(string msg, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string caller = null)
+        public static void Debug(string msg, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string? caller = null)
         {
             Write(msg, Level.DEBUG, ConsoleColor.Green, lineNumber, caller);
         }

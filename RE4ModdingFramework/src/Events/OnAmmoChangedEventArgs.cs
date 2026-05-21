@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace RE4ModdingFramework.src.Events
 {
-    public class OnPlayerDamagedEventArgs : EventArgs
+    public class OnAmmoChangedEventArgs : EventArgs
     {
         /// <summary>
-        /// The amount of damage dealt to the player
+        /// The ammo that has been consumed
         /// </summary>
-        public int Damage { get; }
+        public int Ammo { get; }
 
-        public OnPlayerDamagedEventArgs(int damage)
+        internal OnAmmoChangedEventArgs(int ammo)
         {
-            Damage = damage;
+            Ammo = ammo;
         }
     }
 }

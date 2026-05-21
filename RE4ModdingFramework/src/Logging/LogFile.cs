@@ -9,7 +9,7 @@ namespace RE4ModdingFramework.src.Logging
 {
     public static class LogFile
     {
-        private static readonly string projectName = Assembly.GetEntryAssembly().GetName().Name;
+        private static readonly string? projectName = Assembly.GetEntryAssembly().GetName().Name;
 
         private static readonly string dirPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), projectName, "Logs");
 

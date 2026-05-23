@@ -8,7 +8,7 @@ namespace RE4ModdingFramework.src.Events
 {
     public class OnAmmoChangedEventArgs : EventArgs
     {
-        public int Ammo { get; }
+        public int Ammo { get; set; }
 
         internal OnAmmoChangedEventArgs(int ammo)
         {

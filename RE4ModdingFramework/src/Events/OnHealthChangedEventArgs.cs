@@ -10,7 +10,7 @@ namespace RE4ModdingFramework.src.Events
     {
         public int Health { get; set; }
 
-        public OnHealthChangedEventArgs(int health) 
+        internal OnHealthChangedEventArgs(int health) 
         {
             Health = health;
         }

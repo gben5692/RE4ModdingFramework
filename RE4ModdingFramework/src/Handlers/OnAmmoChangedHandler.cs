@@ -3,15 +3,26 @@ using RE4ModdingFramework.src.Logging;
 
 namespace RE4ModdingFramework.src.Handlers
 {
-    public class OnAmmoChangedHandler
+    internal class OnAmmoChangedHandler
     {
         private static int lastAmmo = 0;
         private static bool isFirstRun = true;
+        private static bool write = false;
+        private static OnAmmoChangedEventArgs? ammoChangedEv;
 
         public static void OnAmmoChanged(int ammo)
         {
-            var ammoChangedEv = new OnAmmoChangedEventArgs(ammo);
+            ammoChangedEv = new OnAmmoChangedEventArgs(ammo);
             Player.InvokeAmmoChanged(ammoChangedEv);
+
+            if (ammoChangedEv.Ammo != lastAmmo)
+            {
+                write = true;
+            }
+            else
+            {
+                write = false;
+            }
         }
 
         public static void Poll()
@@ -34,6 +45,7 @@ namespace RE4ModdingFramework.src.Handlers
 
             var currentAmmo = Memory.Read<int>(ammoAdress);
 
+
             if (isFirstRun)
             {
                 lastAmmo = currentAmmo;
@@ -44,6 +56,13 @@ namespace RE4ModdingFramework.src.Handlers
             {
                 lastAmmo = currentAmmo;
                 OnAmmoChanged(currentAmmo);
+            }
+
+            if (write)
+            {
+                Memory.Write<int>(ammoAdress, ammoChangedEv.Ammo);
+                lastAmmo = currentAmmo;
+                write = false;
             }
 
         }

@@ -7,12 +7,23 @@ namespace RE4ModdingFramework.src.Handlers
     internal class OnHealthChangedHandler
     {
         private static int lastHealth = 0;
+        private static bool write = false;
         private static bool isFirstRun = true;
+        private static OnHealthChangedEventArgs? healthChangedEv;
 
         public static void OnHealthChanged(int health)
         {
-            var healthChangedEv = new OnHealthChangedEventArgs(health);
+            healthChangedEv = new OnHealthChangedEventArgs(health);
             Player.InvokePlayerHealthChanged(healthChangedEv);
+
+            if (healthChangedEv.Health != lastHealth)
+            {
+                write = true;
+            }
+            else
+            {
+                write = false;
+            }
         }
 
         public static void Poll()
@@ -43,6 +54,13 @@ namespace RE4ModdingFramework.src.Handlers
             {
                 lastHealth = currentHealth;
                 OnHealthChanged(currentHealth);
+            }
+
+            if (write)
+            {
+                Memory.Write<int>(healthAddress, healthChangedEv.Health);
+                lastHealth = currentHealth;
+                write = false;
             }
         }
     }

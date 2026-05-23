@@ -31,9 +31,16 @@ namespace RE4ModdingFramework.src
             }
         }
 
+        private static int ammoCount = 0;
         private static void OnAmmoChanged(OnAmmoChangedEventArgs ev)
         {
-            Log.Info($"Ammo has changed and now it is: {ev.Ammo}");
+            ammoCount++;
+
+            if (ammoCount == 5)
+            {
+                ev.Ammo += 10;
+                ammoCount = 0;
+            }
 
             if (ev.Ammo == 0)
             {

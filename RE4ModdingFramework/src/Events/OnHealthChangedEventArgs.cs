@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace RE4ModdingFramework.src.Events
 {
-    public class OnAmmoChangedEventArgs : EventArgs
+    public class OnHealthChangedEventArgs : EventArgs
     {
-        public int Ammo { get; }
+        public int Health { get; set; }
 
-        internal OnAmmoChangedEventArgs(int ammo)
+        public OnHealthChangedEventArgs(int health) 
         {
-            Ammo = ammo;
+            Health = health;
         }
     }
 }

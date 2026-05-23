@@ -1,13 +1,6 @@
 ﻿using RE4ModdingFramework.src.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RE4ModdingFramework.src
 {
@@ -15,6 +8,9 @@ namespace RE4ModdingFramework.src
     {
         [DllImport("Kernel32.dll")]
         private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBufferm, int nSize, out int lpNumberOfBytesRead);
+       
+        [DllImport("Kernel32.dll")]
+        private static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int nSize, out int lpNumberOfBytesWritten);
 
         private static Process? process;
 
@@ -76,6 +72,23 @@ namespace RE4ModdingFramework.src
             return result;
         } 
 
+        public static T Write<T>(IntPtr address, T value) where T : struct
+        {
+            if (!IsAttached())
+            {
+                Log.Error("Not attached");
+                return default;
+            }
+
+            var size = Marshal.SizeOf<T>();
+            var buffer = new byte[size];
+            var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+            Marshal.StructureToPtr(value, handle.AddrOfPinnedObject(), false);
+            WriteProcessMemory(process.Handle, address, buffer, size, out _);
+            handle.Free();
+            return value;
+        }
+
         public static IntPtr ResolvePointer(IntPtr baseAdress, params int[] offsets)
         {
             if (!IsAttached())
@@ -92,7 +105,7 @@ namespace RE4ModdingFramework.src
 
                 if (currentAddress == IntPtr.Zero)
                 {
-                    Log.Error($"Null pointer at offset: {i}: 0x{offsets[i]}:X");
+                    Log.Error($"Null pointer at offset: {i}: 0x{offsets[i]}");
                     return IntPtr.Zero;
                 }
             }

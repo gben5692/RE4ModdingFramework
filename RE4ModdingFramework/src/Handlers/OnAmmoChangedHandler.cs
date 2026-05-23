@@ -6,7 +6,7 @@ namespace RE4ModdingFramework.src.Handlers
     public class OnAmmoChangedHandler
     {
         private static int lastAmmo = 0;
-        private static bool consumeAmmo = true;
+        private static bool isFirstRun = true;
 
         public static void OnAmmoChanged(int ammo)
         {
@@ -33,7 +33,12 @@ namespace RE4ModdingFramework.src.Handlers
             }
 
             var currentAmmo = Memory.Read<int>(ammoAdress);
-            lastAmmo = currentAmmo;
+
+            if (isFirstRun)
+            {
+                lastAmmo = currentAmmo;
+                isFirstRun = false;
+            }
 
             if (currentAmmo != lastAmmo)
             {

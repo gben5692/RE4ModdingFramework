@@ -31,6 +31,7 @@ namespace RE4ModdingFramework.src.Handlers
             if (!Memory.IsAttached())
             {
                 Log.Error("Not attached to re4");
+                return;
             }
 
             var baseAddress = Memory.GetModuleBase("re4.exe") + 0x0D66E7A0;
@@ -59,7 +60,7 @@ namespace RE4ModdingFramework.src.Handlers
             if (write)
             {
                 Memory.Write<int>(healthAddress, healthChangedEv.Health);
-                lastHealth = currentHealth;
+                lastHealth = healthChangedEv.Health;
                 write = false;
             }
         }

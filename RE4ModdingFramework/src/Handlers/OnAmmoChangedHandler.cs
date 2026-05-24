@@ -34,8 +34,8 @@ namespace RE4ModdingFramework.src.Handlers
                 return;
             }
 
-            var baseAddress = Memory.GetModuleBase("re4.exe") + 0x0D68AEB8;
-            var ammoAdress = Memory.ResolvePointer(baseAddress, 0x30, 0x60, 0x84);
+            var baseAddress = Memory.GetModuleBase("re4.exe") + 0x0D66E1A8;
+            var ammoAdress = Memory.ResolvePointer(baseAddress, 0x88, 0x18, 0xA0, 0x170, 0x28, 0x84);
 
             if (ammoAdress == IntPtr.Zero)
             {
@@ -61,7 +61,7 @@ namespace RE4ModdingFramework.src.Handlers
             if (write)
             {
                 Memory.Write<int>(ammoAdress, ammoChangedEv.Ammo);
-                lastAmmo = currentAmmo;
+                lastAmmo = ammoChangedEv.Ammo;
                 write = false;
             }
 

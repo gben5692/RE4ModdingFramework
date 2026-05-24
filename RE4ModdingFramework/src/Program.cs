@@ -25,6 +25,8 @@ namespace RE4ModdingFramework.src
         {
             Log.Info($"Health has changed and now it is: {ev.Health}");
 
+            ev.Health += 50;
+
             if (ev.Health == 0)
             {
                 Log.Info("Player is dead");

@@ -9,9 +9,9 @@ namespace RE4ModdingFramework.src.Logging
 {
     public static class LogFile
     {
-        private static readonly string? projectName = Assembly.GetEntryAssembly().GetName().Name;
+        private static readonly string? projectName = Assembly.GetEntryAssembly()!.GetName().Name;
 
-        private static readonly string dirPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), projectName, "Logs");
+        private static readonly string dirPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), projectName!, "Logs");
 
         public static void CreateDirectory()
         {
@@ -24,7 +24,7 @@ namespace RE4ModdingFramework.src.Logging
         public static void WriteToFile(string msg)
         {
             try
-            {
+            {   
                 File.AppendAllText(Path.Combine(dirPath, "Log_[" + Time.GetDay() + "].txt"), msg + Environment.NewLine);
             }
             catch (Exception ex)

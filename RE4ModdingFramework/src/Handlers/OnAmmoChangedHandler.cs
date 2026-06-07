@@ -34,8 +34,10 @@ namespace RE4ModdingFramework.src.Handlers
                 return;
             }
 
+            // BUG: This pointer does not work at the moment :(
             var baseAddress = Memory.GetModuleBase("re4.exe") + 0x0D66E1A8;
             var ammoAdress = Memory.ResolvePointer(baseAddress, 0x88, 0x18, 0xA0, 0x170, 0x28, 0x84);
+            //---------------------------------------------------------------------------------------
 
             if (ammoAdress == IntPtr.Zero)
             {
@@ -60,7 +62,7 @@ namespace RE4ModdingFramework.src.Handlers
 
             if (write)
             {
-                Memory.Write<int>(ammoAdress, ammoChangedEv.Ammo);
+                Memory.Write<int>(ammoAdress, ammoChangedEv!.Ammo);
                 lastAmmo = ammoChangedEv.Ammo;
                 write = false;
             }

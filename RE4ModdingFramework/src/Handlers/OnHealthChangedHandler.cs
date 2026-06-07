@@ -34,13 +34,20 @@ namespace RE4ModdingFramework.src.Handlers
                 return;
             }
 
-            var baseAddress = Memory.GetModuleBase("re4.exe") + 0x0D66E7A0;
-            var healthAddress = Memory.ResolvePointer(baseAddress, 0xA0, 0x40, 0x148, 0x14);
+            var baseAddress = Memory.GetModuleBase("re4.exe") + 0x0D66E918;
+            var healthAddress = Memory.ResolvePointer(baseAddress, 0x10, 0x40, 0x50, 0x1F4);
 
             if (healthAddress == IntPtr.Zero)
             {
+                // This usally prints when you are in the main menu or loading screens
                 Log.Error("Failed to resolve the pointer for health!");
                 return;
+            }
+            else
+            {
+#if DEBUG
+                Log.Debug($"Health address: 0x{healthAddress}");
+#endif
             }
 
             var currentHealth = Memory.Read<int>(healthAddress);
@@ -59,7 +66,7 @@ namespace RE4ModdingFramework.src.Handlers
 
             if (write)
             {
-                Memory.Write<int>(healthAddress, healthChangedEv.Health);
+                Memory.Write<int>(healthAddress, healthChangedEv!.Health);
                 lastHealth = healthChangedEv.Health;
                 write = false;
             }

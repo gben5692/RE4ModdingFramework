@@ -33,8 +33,8 @@ namespace RE4ModdingFramework.src
                         if (type.IsSubclassOf(typeof(Plugin)))
                         {
                             var plugin = (Plugin)Activator.CreateInstance(type)!;
-                            plugin.OnEnabled();
                             Log.Info($"Loaded {plugin.Name} by {plugin.Author} v{plugin.Version} ");
+                            plugin.OnEnabled();
                         }
                     }
                 }

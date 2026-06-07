@@ -65,7 +65,7 @@ namespace RE4ModdingFramework.src
 
             var size = Marshal.SizeOf<T>();
             var buffer = new byte[size];
-            ReadProcessMemory(process.Handle, address, buffer, size, out _);
+            ReadProcessMemory(process!.Handle, address, buffer, size, out _);
             var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             var result = Marshal.PtrToStructure<T>(handle.AddrOfPinnedObject());
             handle.Free();
@@ -84,7 +84,7 @@ namespace RE4ModdingFramework.src
             var buffer = new byte[size];
             var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             Marshal.StructureToPtr(value, handle.AddrOfPinnedObject(), false);
-            WriteProcessMemory(process.Handle, address, buffer, size, out _);
+            WriteProcessMemory(process!.Handle, address, buffer, size, out _);
             handle.Free();
             return value;
         }

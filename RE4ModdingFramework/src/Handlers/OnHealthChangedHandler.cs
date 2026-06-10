@@ -6,14 +6,18 @@ namespace RE4ModdingFramework.src.Handlers
 {
     internal class OnHealthChangedHandler
     {
+
         private static int lastHealth = 0;
+
         private static bool write = false;
+
         private static bool isFirstRun = true;
+
         private static OnHealthChangedEventArgs? healthChangedEv;
 
-        public static void OnHealthChanged(int health)
+        public static void OnHealthChanged(int health, int damaged, int healed)
         {
-            healthChangedEv = new OnHealthChangedEventArgs(health);
+            healthChangedEv = new OnHealthChangedEventArgs(health, damaged, healed);
             Player.InvokePlayerHealthChanged(healthChangedEv);
 
             if (healthChangedEv.Health != lastHealth)
@@ -26,7 +30,7 @@ namespace RE4ModdingFramework.src.Handlers
             }
         }
 
-        public static void Poll()
+        public static void Pull()
         {
             if (!Memory.IsAttached())
             {
@@ -58,10 +62,24 @@ namespace RE4ModdingFramework.src.Handlers
                 isFirstRun = false;
             }
 
+            var damaged = 0;
+            var healed = 0;
+
             if (currentHealth != lastHealth)
             {
+                if (currentHealth < lastHealth)
+                {
+                    // Player Damaged
+                    damaged = lastHealth - currentHealth;
+                }
+                else
+                {
+                    // Player Healed
+                    healed = currentHealth - lastHealth;
+                }
+
                 lastHealth = currentHealth;
-                OnHealthChanged(currentHealth);
+                OnHealthChanged(currentHealth, damaged, healed);
             }
 
             if (write)

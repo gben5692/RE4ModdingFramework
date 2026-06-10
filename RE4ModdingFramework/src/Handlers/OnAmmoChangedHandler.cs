@@ -25,7 +25,7 @@ namespace RE4ModdingFramework.src.Handlers
             }
         }
 
-        public static void Poll()
+        public static void Pull()
         {
 
             if (!Memory.IsAttached())
@@ -43,6 +43,12 @@ namespace RE4ModdingFramework.src.Handlers
             {
                 Log.Error("Failed to resolve ammo address");
                 return;
+            }
+            else
+            {
+#if DEBUG
+                Log.Debug($"Ammo address: 0x{ammoAdress}");
+#endif
             }
 
             var currentAmmo = Memory.Read<int>(ammoAdress);

@@ -1,6 +1,4 @@
-﻿using RE4ModdingFramework.src.Events;
-using RE4ModdingFramework.src.Logging;
-using RE4ModdingFramework.src.Handlers;
+﻿using RE4ModdingFramework.src.Handlers;
 
 namespace RE4ModdingFramework.src
 {
@@ -13,8 +11,9 @@ namespace RE4ModdingFramework.src
 
             while (Memory.IsAttached())
             {
-                OnAmmoChangedHandler.Poll();
-                OnHealthChangedHandler.Poll();
+                OnAmmoChangedHandler.Pull();
+                OnHealthChangedHandler.Pull();
+                OnPtasChangedHandler.Pull();
                 Thread.Sleep(50);
             }
 

@@ -1,14 +1,9 @@
 ﻿using RE4ModdingFramework.src.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RE4ModdingFramework.src
 {
-    public class Loader
+    internal class Loader
     {
         private readonly static string? pluginsDirectoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins");
 
@@ -44,6 +39,32 @@ namespace RE4ModdingFramework.src
                 }
             }
         }   
+
+        public static void UnloadPlugins()
+        {
+            var dllFiles = Directory.GetFiles(pluginsDirectoryPath!, "*.dll");
+
+            foreach (var dllFile in dllFiles)
+            {
+                try
+                {
+                    var assembly = Assembly.LoadFrom(dllFile);
+
+                    foreach (var type in assembly.GetTypes())
+                    {
+                        if (type.IsSubclassOf(typeof(Plugin)))
+                        {
+                            // Unload Here
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error($"Failed to unload plugin: {Path.GetFileName(dllFile)}. Error: {ex.Message}");
+                }
+            }
+        }
+
 
         public static void CreatePluginsDirectory()
         {

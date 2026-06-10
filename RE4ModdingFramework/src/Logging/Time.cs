@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RE4ModdingFramework.src.Logging
 {
-    public static class Time
+    internal static class Time
     {
         public static string GetTime()
         {

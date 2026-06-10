@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RE4ModdingFramework.src.Logging
 {
-    public static class LogFile
+    internal static class LogFile
     {
         private static readonly string? projectName = Assembly.GetEntryAssembly()!.GetName().Name;
 

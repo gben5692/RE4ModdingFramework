@@ -5,7 +5,7 @@ namespace RE4ModdingFramework.src.Logging
 {
     public static class Log
     {
-        private enum Level
+        internal enum Level
         {
             INFO,
             WARNING,
@@ -33,7 +33,7 @@ namespace RE4ModdingFramework.src.Logging
             Write(msg, Level.DEBUG, ConsoleColor.Green, lineNumber, caller!);
         }
 
-        private static void Write(string msg, Level level, ConsoleColor levelcolor, int lineNumber, string caller)
+        internal static void Write(string msg, Level level, ConsoleColor levelcolor, int lineNumber, string caller)
         {
             string time = Time.GetTime();
             LogFile.CreateDirectory();

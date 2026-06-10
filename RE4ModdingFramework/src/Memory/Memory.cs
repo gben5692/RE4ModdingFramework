@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace RE4ModdingFramework.src
 {
-    public static class Memory
+    internal static class Memory
     {
         [DllImport("Kernel32.dll")]
         private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBufferm, int nSize, out int lpNumberOfBytesRead);

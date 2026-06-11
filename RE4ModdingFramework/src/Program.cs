@@ -11,7 +11,6 @@ namespace RE4ModdingFramework.src
 
             while (Memory.IsAttached())
             {
-                OnAmmoChangedHandler.Pull();
                 OnHealthChangedHandler.Pull();
                 OnPtasChangedHandler.Pull();
                 Thread.Sleep(50);

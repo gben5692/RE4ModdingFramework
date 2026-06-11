@@ -11,7 +11,7 @@ namespace RE4ModdingFramework.src.Events
         /// <summary>
         /// The money that has been changed
         /// </summary>
-        public int Ptas { get; }
+        public int Ptas { get; set; }
 
         /// <summary>
         /// How much money you spent
